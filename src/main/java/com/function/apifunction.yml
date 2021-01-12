@@ -1,0 +1,126 @@
+openapi: '3.0.2'
+info:
+  title: API FunctionAzure
+  version: '1.0'
+  description: Functions Azure / Swagger 3.0 / VSCode
+  contact:
+    name: Denilson Marcio
+    email: denilson.santos7@fatec.sp.gov.br
+    url: https://github.com/DenilsonMarcio
+servers:
+  - description: Servidor Api FunctionAzure
+    url: http://localhost:7071/api
+      
+components:
+  schemas:
+    Json:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: Joaquim
+
+paths:
+  /functionpathparamter/{numero}:
+    get:
+      description: Esta **function** recebe um parametro no path e verifica se o número informado e maior que 5.
+      externalDocs:
+        description: Repositório da Função no GitHub
+        url: https://github.com/DenilsonMarcio/azurefunctions/blob/main/src/main/java/com/function/Function_1.java
+      tags:
+        - "AzureFuction"
+      parameters:
+        - name: numero
+          in: path
+          required: true
+          schema:
+            type: integer 
+            format: int32         
+      responses:
+        '200':
+          description: OK
+          content:
+            'text/html':
+              schema:
+                type: integer
+                format: int32
+                example: 4
+              
+        '400':
+          description: BAD_REQUEST
+        
+  /functionqueryparamter:
+    get:
+      description: Esta function recebe um **query parameter** e verifica se o numero informado e mais que 5
+      externalDocs:
+        description: Repositório da Função no GitHub
+        url: https://github.com/DenilsonMarcio/azurefunctions/blob/main/src/main/java/com/function/Function_2.java
+      tags:
+        - "AzureFuction"
+      parameters:
+        - name: numero
+          in: query
+          schema:
+            type: integer 
+            format: int32         
+      responses:
+        '200':
+          description: OK
+          content:
+            'text/html':
+              schema:
+                type: integer
+        '400':
+          description: BAD_REQUEST
+          
+  /functionjsonname:
+    post:
+      description: Esta function recebe um json e verifica se o **valor passado** existe
+      externalDocs:
+        description: Repositório da Função no GitHub
+        url: https://github.com/DenilsonMarcio/azurefunctions/blob/main/src/main/java/com/function/Function_3.java
+      tags:
+        - "AzureFuction"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Json'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Json'
+        '400':
+          description: BAD_REQUEST
+        
+  /functionvalidationheader:
+    post:
+      description: Esta function recebe um json e verifica se o **valor passado** existe e valida se o **header** esta **presente** e se tem **permissão de acesso**.
+      externalDocs:
+        description: Repositório da Função no GitHub
+        url: https://github.com/DenilsonMarcio/azurefunctions/blob/main/src/main/java/com/function/Function_4.java
+      tags:
+        - "AzureFuction"
+      requestBody:
+        content:
+          
+            
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Json'
+              
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Json'
+        '400':
+          description: BAD_REQUEST
+        
+
+        
