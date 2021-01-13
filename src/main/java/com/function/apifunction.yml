@@ -10,15 +10,6 @@ info:
 servers:
   - description: Servidor Api FunctionAzure
     url: http://localhost:7071/api
-      
-components:
-  schemas:
-    Json:
-      type: object
-      properties:
-        nome:
-          type: string
-          example: Joaquim
 
 paths:
   /functionpathparamter/{numero}:
@@ -35,17 +26,16 @@ paths:
           required: true
           schema:
             type: integer 
-            format: int32         
+            format: int32 
       responses:
         '200':
           description: OK
           content:
-            'text/html':
+            text/html:
               schema:
                 type: integer
                 format: int32
                 example: 4
-              
         '400':
           description: BAD_REQUEST
         
@@ -104,14 +94,17 @@ paths:
         url: https://github.com/DenilsonMarcio/azurefunctions/blob/main/src/main/java/com/function/Function_4.java
       tags:
         - "AzureFuction"
+      parameters:
+        - name: useridentifier
+          in: header
+          schema:
+            type: string 
+          required: true    
       requestBody:
         content:
-          
-            
           application/json:
             schema:
               $ref: '#/components/schemas/Json'
-              
       responses:
         '200':
           description: OK
@@ -121,6 +114,19 @@ paths:
                 $ref: '#/components/schemas/Json'
         '400':
           description: BAD_REQUEST
-        
+
+components:
+  schemas:
+    Json:
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome
+          enum:
+            - Joaquim
+            - José
+            - João
+
 
         
